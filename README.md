@@ -8,11 +8,9 @@
 
 - Typescript
 - React
-- React router
 - Victory
 - Axios
 - Dayjs
-- BigNumberjs
 - SCSS
 - React-datepicker
 

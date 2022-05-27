@@ -1,0 +1,51 @@
+@use 'src/styles/constants/colors';
+
+.detailList {
+  .optionList {
+    display: flex;
+    width: 100%;
+    padding: 10px 0;
+    background-color: white;
+    border-bottom: 0.8px solid colors.$GRAY3;
+
+    .option {
+      padding-left: 30px;
+      font-size: 18px;
+      color: colors.$GRAY4;
+
+      label {
+        cursor: pointer;
+      }
+
+      .optionInput:checked + label {
+        font-weight: 500;
+        color: colors.$GRAY5;
+      }
+    }
+  }
+
+  .details {
+    height: 280px;
+    padding: 10px;
+    overflow-y: scroll;
+
+    .addDetail {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 80px;
+      font-size: 14px;
+      color: colors.$GRAY5;
+      background-color: colors.$GRAY2;
+      border: 0.5px solid colors.$GRAY3;
+      border-radius: 10px;
+
+      .addBtn {
+        padding-bottom: 5px;
+        fill: colors.$BLUE2;
+      }
+    }
+  }
+}
