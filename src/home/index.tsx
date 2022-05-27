@@ -2,6 +2,10 @@ import styles from './home.module.scss'
 import { AddIcon } from 'assets/svgs'
 import Chart from './Chart/Chart'
 import DetailList from './DetailList/DetailList'
+import { useState } from 'react'
+import Modal from './Modal/Modal'
+import Portal from 'portal'
+import Calendar from './Modal/Calendar/Calendar'
 
 export interface ContentDetail {
   id: number
@@ -18,6 +22,12 @@ export interface Contents {
 }
 
 const Home = () => {
+  const [openModal, setOpenModal] = useState(false)
+
+  const handleOpenModal = () => {
+    setOpenModal((prev) => !prev)
+  }
+
   const data: Contents = {
     value: [
       {
@@ -72,13 +82,18 @@ const Home = () => {
       <div className={styles.home}>
         <header className={styles.header}>
           <h1>이 달의 소비</h1>
-          <button className={styles.addBtn} type='button'>
+          <button className={styles.addBtn} type='button' onClick={handleOpenModal}>
             <AddIcon />
           </button>
         </header>
         <main className={styles.main}>
           <Chart />
           <DetailList data={data} />
+          {openModal && (
+            <Portal>
+              <Modal handleModal={handleOpenModal} />
+            </Portal>
+          )}
         </main>
       </div>
     </div>
