@@ -1,0 +1,67 @@
+{
+  "value": [
+    {
+        "id": 1,
+        "date": "2022-05-02",
+        "details": {
+          "type": "minus",
+          "content": "콘서트"
+        },
+        "amount": 140000
+      },
+    {
+        "id": 2,
+        "date": "2022-05-28",
+        "details": {
+          "type": "minus",
+          "content": "아이스크림"
+        },
+        "amount": 9800
+      },
+    {
+        "id": 3,
+        "date": "2022-05-28",
+        "details": {
+          "type": "minus",
+          "content": "요가링"
+        },
+        "amount": 7900
+      },
+      {
+          "id": 4,
+          "date": "2022-05-01",
+          "details": {
+              "type": "plus",
+              "content": "용돈"
+            },
+            "amount": 300000
+        },
+        {
+            "id": 5,
+            "date": "2022-05-15",
+            "details": {
+                "type": "plus",
+                "content": "배당금"
+            },
+            "amount": 6420
+        },
+        {
+            "id": 6,
+            "date": "2022-05-21",
+            "details": {
+              "type": "plus",
+              "content": "예금이자"
+            },
+            "amount": 710
+          },
+        {
+            "id": 7,
+            "date": "2022-05-08",
+            "details": {
+              "type": "minus",
+              "content": "주문케익"
+            },
+            "amount": 49000
+        }
+  ]
+}

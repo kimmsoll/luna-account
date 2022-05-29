@@ -1,9 +1,9 @@
 import { cx } from 'styles'
-import { ContentDetail } from 'home'
+import { IContentDetail } from 'home'
 import styles from './detail.module.scss'
 
 interface Props {
-  detail: ContentDetail
+  detail: IContentDetail
 }
 
 const Detail = ({ detail }: Props) => {
@@ -18,7 +18,9 @@ const Detail = ({ detail }: Props) => {
     <dl className={styles.detail}>
       <dt>{date}</dt>
       <dd>{content}</dd>
-      <dd className={cx({ [styles.red]: isMinus })}>{isMinus ? `-${amount}` : `+${amount}`}</dd>
+      <dd className={cx({ [styles.red]: isMinus })}>
+        {isMinus ? `- ${amount.toLocaleString()}` : `+ ${amount.toLocaleString()}`}
+      </dd>
     </dl>
   )
 }

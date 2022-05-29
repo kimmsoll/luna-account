@@ -5,9 +5,8 @@ import DetailList from './DetailList/DetailList'
 import { useState } from 'react'
 import Modal from './Modal/Modal'
 import Portal from 'portal'
-import Calendar from './Modal/Calendar/Calendar'
 
-export interface ContentDetail {
+export interface IContentDetail {
   id: number
   date: string
   details: {
@@ -17,10 +16,6 @@ export interface ContentDetail {
   amount: number
 }
 
-export interface Contents {
-  value: ContentDetail[]
-}
-
 const Home = () => {
   const [openModal, setOpenModal] = useState(false)
 
@@ -28,55 +23,6 @@ const Home = () => {
     setOpenModal((prev) => !prev)
   }
 
-  const data: Contents = {
-    value: [
-      {
-        id: 1,
-        date: '2022-05-27',
-        details: {
-          type: 'minus',
-          content: '달걀 사기',
-        },
-        amount: 3000,
-      },
-      {
-        id: 2,
-        date: '2022-05-27',
-        details: {
-          type: 'minus',
-          content: '미용실',
-        },
-        amount: 100000,
-      },
-      {
-        id: 3,
-        date: '2022-05-27',
-        details: {
-          type: 'plus',
-          content: '용돈',
-        },
-        amount: 300000,
-      },
-      {
-        id: 4,
-        date: '2022-05-27',
-        details: {
-          type: 'plus',
-          content: '용돈',
-        },
-        amount: 300000,
-      },
-      {
-        id: 5,
-        date: '2022-05-27',
-        details: {
-          type: 'plus',
-          content: '용돈',
-        },
-        amount: 300000,
-      },
-    ],
-  }
   return (
     <div className={styles.homeWrapper}>
       <div className={styles.home}>
@@ -88,7 +34,7 @@ const Home = () => {
         </header>
         <main className={styles.main}>
           <Chart />
-          <DetailList data={data} />
+          <DetailList handleModal={handleOpenModal} />
           {openModal && (
             <Portal>
               <Modal handleModal={handleOpenModal} />

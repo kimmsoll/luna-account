@@ -1,11 +1,17 @@
 import { AddIcon } from 'assets/svgs'
-import { ContentDetail, Contents } from 'home'
+import { IContentDetail } from 'home'
+import { useRecoil } from 'hooks/state'
 import { ChangeEvent, useState } from 'react'
+import { dataListState } from 'states/data'
 import Detail from './Detail/Detail'
 import styles from './detailList.module.scss'
 
 interface Props {
-  data: Contents
+  handleModal: () => void
+}
+
+interface Filtered {
+  [key: string]: IContentDetail[]
 }
 
 const options = [
@@ -14,21 +20,28 @@ const options = [
   { title: 'expenditure', value: '지출' },
 ]
 
-const DetailList = ({ data }: Props) => {
-  const [contents, setContents] = useState(data.value)
+const sortData = (data: IContentDetail[]) => {
+  return data.sort((a: IContentDetail, b: IContentDetail) => {
+    return a.date > b.date ? -1 : 1
+  })
+}
 
-  const filterSelected = (title: string): ContentDetail[] => {
-    const selections: any = {
-      all: data.value,
-      income: data.value.filter((v) => v.details.type === 'plus'),
-      expenditure: data.value.filter((v) => v.details.type === 'minus'),
+const DetailList = ({ handleModal }: Props) => {
+  const [data] = useRecoil(dataListState)
+  const [selected, setSelected] = useState<IContentDetail[] | []>([])
+
+  const filterSelected = (title: string): IContentDetail[] => {
+    const selections: Filtered = {
+      all: [...data],
+      income: data.filter((v: IContentDetail) => v.details.type === 'plus'),
+      expenditure: data.filter((v: IContentDetail) => v.details.type === 'minus'),
     }
-    return selections[title]
+    return sortData(selections[title])
   }
 
   const handleSelect = (e: ChangeEvent<HTMLInputElement>) => {
-    const currContents = filterSelected(e.currentTarget.id)
-    setContents(currContents)
+    const currTitle = filterSelected(e.currentTarget.id)
+    setSelected(currTitle)
   }
 
   return (
@@ -45,12 +58,12 @@ const DetailList = ({ data }: Props) => {
         })}
       </div>
       <div className={styles.details}>
-        {contents.map((v, idx) => {
+        {selected?.map((v: IContentDetail, idx: number) => {
           const key = `detail__${idx}`
           return <Detail key={key} detail={v} />
         })}
         <div className={styles.addDetail}>
-          <button className={styles.addBtn} type='button'>
+          <button className={styles.addBtn} type='button' onClick={handleModal}>
             <AddIcon />
           </button>
           <p>거래 내역 추가하기</p>

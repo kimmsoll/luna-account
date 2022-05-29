@@ -1,4 +1,41 @@
+@use 'styles/constants/colors';
+
 .chart {
+  display: flex;
+  flex-direction: column;
   height: 300px;
-  background-color: pink;
+
+  .chartImg {
+    height: 220px;
+  }
+
+  .chartDetail {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .expenditure {
+      border-right: 0.8px solid colors.$GRAY3;
+
+      > dd {
+        color: colors.$RED1;
+      }
+    }
+
+    > dl {
+      width: 120px;
+      padding: 10px 0;
+      text-align: center;
+
+      > dt {
+        padding-bottom: 5px;
+        font-size: 14px;
+      }
+
+      > dd {
+        font-size: 18px;
+        color: colors.$GREEN2;
+      }
+    }
+  }
 }

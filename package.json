@@ -41,6 +41,7 @@
     "react-query": "^3.39.0",
     "react-scripts": "5.0.1",
     "react-use": "^17.3.2",
+    "recoil": "^0.7.3-alpha.2",
     "store": "^2.0.12",
     "victory": "^36.4.0",
     "victory-core": "^36.4.0",
@@ -49,9 +50,9 @@
   "devDependencies": {
     "@types/jest": "^27.0.1",
     "@types/react": "^18.0.0",
+    "@types/react-datepicker": "^4.4.1",
     "@types/react-dom": "^18.0.0",
     "@types/store": "^2.0.2",
-    "@types/react-datepicker": "^4.4.1",
     "babel-eslint": "^10.1.0",
     "babel-plugin-named-exports-order": "^0.0.2",
     "eslint": "^8.14.0",
