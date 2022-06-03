@@ -40,7 +40,7 @@ const Modal = ({ handleModal }: Props) => {
   }
 
   const handleAddData = () => {
-    if (newData.details.type === '' || newData.details.content === '' || newData.amount === 0) {
+    if (!newData.details.type || !newData.details.content || !newData.amount) {
       setIsValidate(false)
     } else if (
       typeof newData.details.type !== 'string' ||
