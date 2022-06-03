@@ -12,7 +12,7 @@ const Calendar = ({ setDate }: Props) => {
 
   const handleDate = (date: Date) => {
     setCurrDate(date)
-    setDate(dayjs(currDate).format('YYYY-MM-DD'))
+    setDate(dayjs(date).format('YYYY-MM-DD'))
   }
 
   return <ReactDatePicker selected={currDate} onChange={handleDate} dateFormat='yyyy년 MM월 dd일' />

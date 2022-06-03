@@ -1,3 +1,5 @@
+import dayjs from 'dayjs'
+import store from 'store'
 import { useRecoil } from 'hooks/state'
 import Portal from 'portal'
 import { ChangeEvent, useState } from 'react'
@@ -10,12 +12,12 @@ interface Props {
 }
 
 const Modal = ({ handleModal }: Props) => {
-  const [date, setDate] = useState('')
+  const [date, setDate] = useState(dayjs(new Date()).format('YYYY-MM-DD'))
   const [type, setType] = useState('')
   const [content, setContent] = useState('')
   const [amount, setAmount] = useState(0)
-  const [, setData] = useRecoil(dataListState)
   const [isValidate, setIsValidate] = useState(true)
+  const [data, setData] = useRecoil(dataListState)
 
   const newData = {
     id: Date.now(),
@@ -38,11 +40,19 @@ const Modal = ({ handleModal }: Props) => {
   }
 
   const handleAddData = () => {
-    if (newData.date === '' || newData.details.type === '' || newData.details.content === '' || newData.amount === 0) {
+    if (newData.details.type === '' || newData.details.content === '' || newData.amount === 0) {
+      setIsValidate(false)
+    } else if (
+      typeof newData.details.type !== 'string' ||
+      typeof newData.details.content !== 'string' ||
+      typeof newData.amount !== 'number'
+    ) {
       setIsValidate(false)
     } else {
       setIsValidate(true)
-      setData((prev) => [...prev, newData])
+      setData([...data, newData])
+      store.set('data', [...data, newData])
+      handleModal()
     }
   }
 
@@ -86,7 +96,7 @@ const Modal = ({ handleModal }: Props) => {
               취소
             </button>
           </div>
-          {!isValidate && <p className={styles.validate}>모든 항목을 입력해주세요.</p>}
+          {!isValidate && <p className={styles.validate}>양식에 맞게 모든 항목을 입력해주세요.</p>}
         </div>
       </div>
     </Portal>

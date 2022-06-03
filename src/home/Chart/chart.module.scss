@@ -1,12 +1,14 @@
-@use 'styles/constants/colors';
+@use 'src/styles/constants/colors';
 
 .chart {
   display: flex;
   flex-direction: column;
-  height: 300px;
+  height: 35vh;
+  max-height: 300px;
 
   .chartImg {
-    height: 220px;
+    height: 70%;
+    max-height: 220px;
   }
 
   .chartDetail {

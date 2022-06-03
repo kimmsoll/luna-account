@@ -1,10 +1,11 @@
 import { AddIcon } from 'assets/svgs'
 import { IContentDetail } from 'home'
 import { useRecoil } from 'hooks/state'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { dataListState } from 'states/data'
 import Detail from './Detail/Detail'
 import styles from './detailList.module.scss'
+import Loading from './Loading/Loading'
 
 interface Props {
   handleModal: () => void
@@ -26,23 +27,36 @@ const sortData = (data: IContentDetail[]) => {
   })
 }
 
+const filterSelected = (title: string, value: IContentDetail[]): IContentDetail[] => {
+  const selections: Filtered = {
+    all: [...value],
+    income: value.filter((v: IContentDetail) => v.details.type === 'plus'),
+    expenditure: value.filter((v: IContentDetail) => v.details.type === 'minus'),
+  }
+  return sortData(selections[title])
+}
+
 const DetailList = ({ handleModal }: Props) => {
   const [data] = useRecoil(dataListState)
+  const [isLoaded, setIsLoaded] = useState(false)
   const [selected, setSelected] = useState<IContentDetail[] | []>([])
-
-  const filterSelected = (title: string): IContentDetail[] => {
-    const selections: Filtered = {
-      all: [...data],
-      income: data.filter((v: IContentDetail) => v.details.type === 'plus'),
-      expenditure: data.filter((v: IContentDetail) => v.details.type === 'minus'),
-    }
-    return sortData(selections[title])
-  }
+  const scrollRef = useRef<HTMLDivElement>(null)
 
   const handleSelect = (e: ChangeEvent<HTMLInputElement>) => {
-    const currTitle = filterSelected(e.currentTarget.id)
+    scrollRef.current?.scrollIntoView()
+    const currTitle = filterSelected(e.currentTarget.id, data)
     setSelected(currTitle)
   }
+
+  useEffect(() => {
+    let timeout: any
+    if (!isLoaded) {
+      timeout = setTimeout(() => {
+        setIsLoaded(true)
+      }, 1000)
+    }
+    return () => clearTimeout(timeout)
+  })
 
   return (
     <div className={styles.detailList}>
@@ -58,16 +72,22 @@ const DetailList = ({ handleModal }: Props) => {
         })}
       </div>
       <div className={styles.details}>
-        {selected?.map((v: IContentDetail, idx: number) => {
-          const key = `detail__${idx}`
-          return <Detail key={key} detail={v} />
-        })}
-        <div className={styles.addDetail}>
-          <button className={styles.addBtn} type='button' onClick={handleModal}>
-            <AddIcon />
-          </button>
-          <p>거래 내역 추가하기</p>
-        </div>
+        {!isLoaded && <Loading />}
+        {isLoaded && (
+          <>
+            <div ref={scrollRef} />
+            {selected?.map((v: IContentDetail, idx: number) => {
+              const key = `detail__${idx}`
+              return <Detail key={key} detail={v} />
+            })}
+            <div className={styles.addDetail}>
+              <button className={styles.addBtn} type='button' onClick={handleModal}>
+                <AddIcon />
+              </button>
+              <p>거래 내역 추가하기</p>
+            </div>
+          </>
+        )}
       </div>
     </div>
   )

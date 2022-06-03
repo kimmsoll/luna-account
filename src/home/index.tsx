@@ -1,5 +1,5 @@
 import styles from './home.module.scss'
-import { AddIcon } from 'assets/svgs'
+import { FilledAddIcon } from 'assets/svgs'
 import Chart from './Chart/Chart'
 import DetailList from './DetailList/DetailList'
 import { useState } from 'react'
@@ -29,7 +29,7 @@ const Home = () => {
         <header className={styles.header}>
           <h1>이 달의 소비</h1>
           <button className={styles.addBtn} type='button' onClick={handleOpenModal}>
-            <AddIcon />
+            <FilledAddIcon />
           </button>
         </header>
         <main className={styles.main}>
