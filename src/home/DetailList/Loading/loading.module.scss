@@ -1,0 +1,27 @@
+@use 'src/styles/constants/colors';
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.spinnerWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  .spinner {
+    width: 30px;
+    height: 30px;
+    border: 7px solid colors.$BLUE3;
+    border-top: 7px solid colors.$BLUE2;
+    border-radius: 50%;
+    animation: spinner 0.8s ease-in infinite;
+  }
+}
