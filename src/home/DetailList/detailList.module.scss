@@ -1,7 +1,7 @@
 @use 'src/styles/constants/colors';
 
 .detailList {
-  height: 40vh;
+  height: 41vh;
   max-height: 330px;
 
   .optionList {
@@ -11,8 +11,8 @@
     border-bottom: 0.8px solid colors.$GRAY3;
 
     .option {
-      padding-left: 30px;
-      font-size: 18px;
+      padding-left: 25px;
+      font-size: 16px;
       color: colors.$GRAY4;
 
       label {

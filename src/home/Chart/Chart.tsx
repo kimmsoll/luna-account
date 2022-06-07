@@ -44,7 +44,7 @@ const Chart = ({ month }: Props) => {
           }
           innerRadius={50}
           labelRadius={73}
-          style={{ labels: { fontSize: 24, fill: 'white' } }}
+          style={{ labels: { fontSize: 32, fill: 'white' } }}
           colorScale={['#98C7CA', '#0c6d98']}
         />
       </div>

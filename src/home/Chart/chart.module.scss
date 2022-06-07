@@ -3,11 +3,13 @@
 .chart {
   display: flex;
   flex-direction: column;
-  height: 35vh;
-  max-height: 300px;
+  justify-content: center;
+  height: 32vh;
+  max-height: 280px;
+  margin-bottom: 10px;
 
   .chartImg {
-    height: 70%;
+    height: 75%;
     max-height: 220px;
   }
 
@@ -25,8 +27,8 @@
     }
 
     > dl {
-      width: 120px;
-      padding: 10px 0;
+      width: 130px;
+      padding: 5px 0;
       text-align: center;
 
       > dt {
