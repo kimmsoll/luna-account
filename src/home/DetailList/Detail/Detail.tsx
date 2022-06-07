@@ -13,13 +13,14 @@ const Detail = ({ detail }: Props) => {
     details: { content, type },
   } = detail
   const isMinus = type === 'minus'
+  const isType = isMinus ? '-' : '+'
 
   return (
     <dl className={styles.detail}>
       <dt>{date}</dt>
       <dd>{content}</dd>
       <dd className={cx({ [styles.red]: isMinus })}>
-        {isMinus ? `- ${amount.toLocaleString()}` : `+ ${amount.toLocaleString()}`}
+        {isType} {amount.toLocaleString()}
       </dd>
     </dl>
   )

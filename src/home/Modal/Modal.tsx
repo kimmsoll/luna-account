@@ -11,6 +11,16 @@ interface Props {
   handleModal: () => void
 }
 
+const handleValidate = (type: string, content: string, amount: number) => {
+  if (!type || !content.trim() || !amount) {
+    return false
+  }
+  if (typeof type !== 'string' || typeof content !== 'string' || typeof amount !== 'number') {
+    return false
+  }
+  return true
+}
+
 const Modal = ({ handleModal }: Props) => {
   const [date, setDate] = useState(dayjs(new Date()).format('YYYY-MM-DD'))
   const [type, setType] = useState('')
@@ -18,16 +28,6 @@ const Modal = ({ handleModal }: Props) => {
   const [amount, setAmount] = useState(0)
   const [isValidate, setIsValidate] = useState(true)
   const [data, setData] = useRecoil(dataListState)
-
-  const newData = {
-    id: Date.now(),
-    date,
-    details: {
-      type,
-      content,
-    },
-    amount,
-  }
 
   const handleSelectType = (e: ChangeEvent<HTMLInputElement>) => {
     setType(e.currentTarget.value)
@@ -40,20 +40,22 @@ const Modal = ({ handleModal }: Props) => {
   }
 
   const handleAddData = () => {
-    if (!newData.details.type || !newData.details.content.trim() || !newData.amount) {
-      setIsValidate(false)
-    } else if (
-      typeof newData.details.type !== 'string' ||
-      typeof newData.details.content !== 'string' ||
-      typeof newData.amount !== 'number'
-    ) {
-      setIsValidate(false)
-    } else {
+    const validatedData = handleValidate(type, content, amount)
+    if (validatedData) {
+      const newData = {
+        id: Date.now(),
+        date,
+        details: {
+          type,
+          content,
+        },
+        amount,
+      }
       setIsValidate(true)
       setData([...data, newData])
       store.set('data', [...data, newData])
       handleModal()
-    }
+    } else setIsValidate(false)
   }
 
   return (
