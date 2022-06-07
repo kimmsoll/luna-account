@@ -1,14 +1,16 @@
-import { AddIcon } from 'assets/svgs'
-import { IContentDetail } from 'home'
-import { useRecoil } from 'hooks/state'
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
-import { dataListState } from 'states/data'
-import Detail from './Detail/Detail'
-import styles from './detailList.module.scss'
+import { useRecoil } from 'hooks/state'
+import { AddIcon } from 'assets/svgs'
+import Button from 'components/Button/Button'
 import Loading from './Loading/Loading'
+import Detail from './Detail/Detail'
+import { IContentDetail } from 'home'
+import { dataListState } from 'states/data'
+import styles from './detailList.module.scss'
 
 interface Props {
   handleModal: () => void
+  month: number
 }
 
 interface Filtered {
@@ -36,15 +38,16 @@ const filterSelected = (title: string, value: IContentDetail[]): IContentDetail[
   return sortData(selections[title])
 }
 
-const DetailList = ({ handleModal }: Props) => {
+const DetailList = ({ handleModal, month }: Props) => {
   const [data] = useRecoil(dataListState)
+  const [currData, setCurrData] = useState(data.filter((v) => month === Number(v.date.slice(5, 7))))
   const [isLoaded, setIsLoaded] = useState(false)
   const [selected, setSelected] = useState<IContentDetail[] | []>([])
   const scrollRef = useRef<HTMLDivElement>(null)
 
   const handleSelect = (e: ChangeEvent<HTMLInputElement>) => {
     scrollRef.current?.scrollIntoView()
-    const currTitle = filterSelected(e.currentTarget.id, data)
+    const currTitle = filterSelected(e.currentTarget.id, currData)
     setSelected(currTitle)
   }
 
@@ -57,6 +60,10 @@ const DetailList = ({ handleModal }: Props) => {
     }
     return () => clearTimeout(timeout)
   })
+
+  useEffect(() => {
+    setCurrData(data.filter((v) => month === Number(v.date.slice(5, 7))))
+  }, [data, month])
 
   return (
     <div className={styles.detailList}>
@@ -81,9 +88,9 @@ const DetailList = ({ handleModal }: Props) => {
               return <Detail key={key} detail={v} />
             })}
             <div className={styles.addDetail}>
-              <button className={styles.addBtn} type='button' onClick={handleModal}>
-                <AddIcon />
-              </button>
+              <Button onClick={handleModal}>
+                <AddIcon fill='#0c6d98' />
+              </Button>
               <p>거래 내역 추가하기</p>
             </div>
           </>

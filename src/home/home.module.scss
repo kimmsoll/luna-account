@@ -39,6 +39,18 @@
       display: flex;
       flex-direction: column;
       padding: 10px;
+
+      .selectMonth {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        > p {
+          padding: 0 50px 2px;
+          font-size: 18px;
+          color: colors.$BLACK1;
+        }
+      }
     }
   }
 }

@@ -1,29 +1,47 @@
 import { IContentDetail } from 'home'
 import { useRecoil } from 'hooks/state'
+import { useEffect, useState } from 'react'
 import { dataListState } from 'states/data'
 import { VictoryPie } from 'victory'
 import styles from './chart.module.scss'
 
-const getSum = (data: IContentDetail[], type: string) => {
-  return data
-    .filter((v) => v.details.type === type)
-    .map((v) => v.amount)
-    .reduce((prev, curr) => prev + curr)
+interface Props {
+  month: number
 }
 
-const Chart = () => {
+const getSum = (data: IContentDetail[] | [], type: string) => {
+  if (!data.length) return 0
+  const targetData = data.filter((v) => v.details.type === type).map((v) => v.amount)
+  if (targetData.length > 1) {
+    return targetData.reduce((prev, curr) => prev + curr)
+  }
+  if (targetData.length === 1) {
+    return targetData[0]
+  }
+  return 0
+}
+
+const Chart = ({ month }: Props) => {
   const [data] = useRecoil(dataListState)
-  const expenditure = getSum(data, 'minus')
-  const income = getSum(data, 'plus')
+  const [currData, setCurrData] = useState(data.filter((v) => month === Number(v.date.slice(5, 7))))
+  const expenditure = getSum(currData, 'minus')
+  const income = getSum(currData, 'plus')
+
+  useEffect(() => {
+    setCurrData(data.filter((v) => month === Number(v.date.slice(5, 7))))
+  }, [data, month])
 
   return (
     <div className={styles.chart}>
       <div className={styles.chartImg}>
         <VictoryPie
-          data={[
-            { x: '수입', y: income },
-            { x: '지출', y: expenditure },
-          ]}
+          data={
+            (income === 0 && [{ x: '지출', y: expenditure }]) ||
+            (expenditure === 0 && [{ x: '수입', y: income }]) || [
+              { x: '수입', y: income },
+              { x: '지출', y: expenditure },
+            ]
+          }
           innerRadius={50}
           labelRadius={73}
           style={{ labels: { fontSize: 24, fill: 'white' } }}

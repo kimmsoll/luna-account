@@ -44,9 +44,8 @@
       border: 0.5px solid colors.$GRAY3;
       border-radius: 10px;
 
-      .addBtn {
-        padding-bottom: 5px;
-        fill: colors.$BLUE2;
+      > p {
+        padding-top: 5px;
       }
     }
   }
