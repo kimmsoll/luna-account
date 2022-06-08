@@ -34,11 +34,33 @@
       > dt {
         padding-bottom: 5px;
         font-size: 14px;
+        color: colors.$BLACK1;
       }
 
       > dd {
         font-size: 18px;
-        color: colors.$GREEN2;
+        color: colors.$GREEN1;
+      }
+    }
+
+    :root[color-theme='dark'] & {
+      .expenditure {
+        border-right: 0.8px solid colors.$BLACK4;
+
+        > dd {
+          color: colors.$RED3;
+        }
+      }
+
+      > dl {
+        > dt {
+          color: colors.$GRAY3;
+        }
+
+        > dd {
+          font-size: 18px;
+          color: colors.$GREEN2;
+        }
       }
     }
   }

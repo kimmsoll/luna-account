@@ -2,6 +2,7 @@ import { IContentDetail } from 'home'
 import { useRecoil } from 'hooks/state'
 import { useEffect, useState } from 'react'
 import { dataListState } from 'states/data'
+import { colorThemeState } from 'states/theme'
 import { VictoryPie } from 'victory'
 import styles from './chart.module.scss'
 
@@ -23,6 +24,7 @@ const getSum = (data: IContentDetail[] | [], type: string) => {
 
 const Chart = ({ month }: Props) => {
   const [data] = useRecoil(dataListState)
+  const [theme] = useRecoil(colorThemeState)
   const [currData, setCurrData] = useState(data.filter((v) => month === Number(v.date.slice(5, 7))))
   const expenditure = getSum(currData, 'minus')
   const income = getSum(currData, 'plus')
@@ -44,8 +46,8 @@ const Chart = ({ month }: Props) => {
           }
           innerRadius={50}
           labelRadius={73}
-          style={{ labels: { fontSize: 32, fill: 'white' } }}
-          colorScale={['#98C7CA', '#0c6d98']}
+          style={{ labels: { fontSize: 32, fill: theme === 'light' ? 'white' : '#d1d1e6' } }}
+          colorScale={theme === 'light' ? ['#98C7CA', '#0c6d98'] : ['#494454', '#8d76d8']}
         />
       </div>
       <div className={styles.chartDetail}>

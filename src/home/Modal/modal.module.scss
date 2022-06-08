@@ -29,8 +29,11 @@
     }
 
     .calendar {
-      padding: 10px 10px 30px;
-      color: colors.$GRAY4;
+      width: 150px;
+      padding: 8px 16px;
+      margin: 10px 10px 30px;
+      background-color: colors.$GRAY2;
+      border-radius: 10px;
     }
 
     .typeBtns {
@@ -61,12 +64,13 @@
       width: 100%;
       padding: 10px;
       margin-bottom: 30px;
+      color: colors.$BLACK1;
       background-color: colors.$GRAY2;
       border-radius: 10px;
 
       &::placeholder {
         font-size: 14px;
-        color: gray;
+        color: colors.$BLACK1;
       }
     }
 
@@ -100,6 +104,55 @@
       font-weight: 400;
       color: colors.$RED2;
       border: none;
+    }
+
+    :root[color-theme='dark'] & {
+      background-color: colors.$BLACK2;
+
+      p {
+        color: colors.$GRAY4;
+        border-bottom: 1px solid colors.$BLACK1;
+      }
+
+      .calendar {
+        background-color: colors.$GRAY5;
+      }
+
+      label {
+        color: colors.$GRAY3;
+        background-color: colors.$BLACK4;
+        border: 0.5px solid colors.$GRAY5;
+      }
+
+      input:checked + label {
+        color: colors.$GRAY2;
+        background-color: colors.$BLUE4;
+      }
+
+      .textInput {
+        color: colors.$GRAY3;
+        background-color: colors.$BLACK3;
+
+        &::placeholder {
+          color: colors.$GRAY4;
+        }
+      }
+
+      .addBtn {
+        color: colors.$GRAY2;
+        background-color: colors.$BLUE4;
+      }
+
+      .backBtn {
+        color: colors.$GRAY3;
+        background-color: colors.$BLACK4;
+        border: 0.5px solid colors.$GRAY5;
+      }
+
+      .validate {
+        color: colors.$RED1;
+        border: none;
+      }
     }
   }
 }

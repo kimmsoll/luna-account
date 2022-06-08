@@ -1,12 +1,13 @@
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { useRecoil } from 'hooks/state'
 import { AddIcon } from 'assets/svgs'
-import Button from 'components/Button/Button'
+import Button from 'components/Button'
 import Loading from './Loading/Loading'
 import Detail from './Detail/Detail'
 import { IContentDetail } from 'home'
 import { dataListState } from 'states/data'
 import styles from './detailList.module.scss'
+import { colorThemeState } from 'states/theme'
 
 interface Props {
   handleModal: () => void
@@ -40,6 +41,7 @@ const filterSelected = (title: string, value: IContentDetail[]): IContentDetail[
 
 const DetailList = ({ handleModal, month }: Props) => {
   const [data] = useRecoil(dataListState)
+  const [theme] = useRecoil(colorThemeState)
   const [currData, setCurrData] = useState(data.filter((v) => month === Number(v.date.slice(5, 7))))
   const [isLoaded, setIsLoaded] = useState(false)
   const [selected, setSelected] = useState<IContentDetail[] | []>([])
@@ -89,7 +91,7 @@ const DetailList = ({ handleModal, month }: Props) => {
             })}
             <div className={styles.addDetail}>
               <Button onClick={handleModal}>
-                <AddIcon fill='#0c6d98' />
+                <AddIcon fill={theme === 'light' ? '#0c6d98' : '#8d76d8'} />
               </Button>
               <p>거래 내역 추가하기</p>
             </div>

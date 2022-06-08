@@ -23,5 +23,10 @@
     border-top: 7px solid colors.$BLUE2;
     border-radius: 50%;
     animation: spinner 0.8s ease-in infinite;
+
+    :root[color-theme='dark'] & {
+      border: 7px solid colors.$BLUE5;
+      border-top: 7px solid colors.$BLUE4;
+    }
   }
 }

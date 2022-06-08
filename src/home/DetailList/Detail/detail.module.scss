@@ -23,13 +23,36 @@
 
   :nth-child(2) {
     font-weight: 500;
+    color: colors.$BLACK1;
   }
 
   :nth-child(3) {
-    color: colors.$GREEN2;
+    color: colors.$GREEN1;
   }
 
   .red {
     color: colors.$RED1;
+  }
+
+  :root[color-theme='dark'] & {
+    background-color: colors.$BLACK3;
+    border: 1px solid colors.$BLACK4;
+
+    dt {
+      color: colors.$GRAY4;
+    }
+
+    :nth-child(2) {
+      font-weight: 500;
+      color: colors.$GRAY3;
+    }
+
+    :nth-child(3) {
+      color: colors.$GREEN2;
+    }
+
+    .red {
+      color: colors.$RED3;
+    }
   }
 }

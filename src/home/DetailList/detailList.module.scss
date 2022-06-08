@@ -49,4 +49,25 @@
       }
     }
   }
+
+  :root[color-theme='dark'] & {
+    .optionList {
+      border-bottom: 0.8px solid colors.$BLACK4;
+
+      .option {
+        color: colors.$GRAY4;
+
+        .optionInput:checked + label {
+          font-weight: 500;
+          color: colors.$GRAY3;
+        }
+      }
+    }
+
+    .addDetail {
+      color: colors.$GRAY3;
+      background-color: colors.$BLACK4;
+      border: 0.5px solid colors.$GRAY5;
+    }
+  }
 }
