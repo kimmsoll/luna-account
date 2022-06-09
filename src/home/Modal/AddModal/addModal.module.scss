@@ -14,10 +14,9 @@
   .content {
     position: relative;
     width: 300px;
-    height: 70%;
-    min-height: 420px;
-    max-height: 500px;
+    height: 500px;
     padding: 20px;
+    overflow-x: hidden;
     overflow-y: scroll;
     background-color: colors.$GRAY1;
     border-radius: 20px;

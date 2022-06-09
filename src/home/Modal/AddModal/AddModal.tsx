@@ -35,11 +35,16 @@ const AddModal = ({ handleModal }: Props) => {
   const handleSelectType = (e: ChangeEvent<HTMLInputElement>) => {
     setType(e.currentTarget.value)
   }
+
   const handleTextContent = (e: ChangeEvent<HTMLInputElement>) => {
     setContent(e.currentTarget.value)
   }
+
   const handleAmount = (e: ChangeEvent<HTMLInputElement>) => {
-    setAmount(Number(e.currentTarget.value))
+    const currValue = Number(e.currentTarget.value)
+    if (isNaN(currValue)) {
+      e.preventDefault()
+    } else setAmount(currValue)
   }
 
   const handleAddData = () => {
