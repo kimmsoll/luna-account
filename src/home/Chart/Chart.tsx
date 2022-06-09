@@ -39,30 +39,32 @@ const Chart = () => {
 
   return (
     <div className={styles.chart}>
-      {isEmpty && (
-        <div className={styles.noChart}>
-          <p>{month}월 거래 내역이 없습니다</p>
-          <WalletIcon fill={theme === 'light' ? '#9cadbc' : '#a9aabc'} />
-        </div>
-      )}
-      {!isEmpty && (
-        <VictoryPie
-          data={
-            (income === 0 && [{ x: '지출', y: expenditure }]) ||
-            (expenditure === 0 && [{ x: '수입', y: income }]) || [
-              { x: '수입', y: income },
-              { x: '지출', y: expenditure },
-            ]
-          }
-          padding={{ top: 0, bottom: 0 }}
-          height={120}
-          width={300}
-          innerRadius={20}
-          labelRadius={30}
-          style={{ labels: { fontSize: 12, fill: theme === 'light' ? 'white' : '#d1d1e6' } }}
-          colorScale={theme === 'light' ? ['#98C7CA', '#0c6d98'] : ['#494454', '#8d76d8']}
-        />
-      )}
+      <div className={styles.chartImg}>
+        {isEmpty && (
+          <div className={styles.noChart}>
+            <p>{month}월 거래 내역이 없습니다</p>
+            <WalletIcon fill={theme === 'light' ? '#9cadbc' : '#a9aabc'} />
+          </div>
+        )}
+        {!isEmpty && (
+          <VictoryPie
+            data={
+              (income === 0 && [{ x: '지출', y: expenditure }]) ||
+              (expenditure === 0 && [{ x: '수입', y: income }]) || [
+                { x: '수입', y: income },
+                { x: '지출', y: expenditure },
+              ]
+            }
+            padding={{ top: 0, bottom: 0 }}
+            height={120}
+            width={300}
+            innerRadius={20}
+            labelRadius={30}
+            style={{ labels: { fontSize: 12, fill: theme === 'light' ? 'white' : '#d1d1e6' } }}
+            colorScale={theme === 'light' ? ['#98C7CA', '#0c6d98'] : ['#494454', '#8d76d8']}
+          />
+        )}
+      </div>
       <div className={styles.chartDetail}>
         <dl className={styles.expenditure}>
           <dt>나간 돈</dt>
