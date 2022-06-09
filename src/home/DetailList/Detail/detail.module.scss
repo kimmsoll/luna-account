@@ -1,58 +1,63 @@
 @use 'src/styles/constants/colors';
 
-.detail {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  height: 70px;
-  padding: 15px;
-  margin-bottom: 10px;
-  background-color: white;
-  border: 1px solid colors.$GRAY2;
-  border-radius: 10px;
+.detailWrapper {
+  width: 100%;
 
-  dt {
-    position: absolute;
-    font-size: 14px;
-    color: colors.$GRAY5;
-  }
-
-  dd {
-    margin-top: 28px;
-  }
-
-  :nth-child(2) {
-    font-weight: 500;
-    color: colors.$BLACK1;
-  }
-
-  :nth-child(3) {
-    color: colors.$GREEN1;
-  }
-
-  .red {
-    color: colors.$RED1;
-  }
-
-  :root[color-theme='dark'] & {
-    background-color: colors.$BLACK3;
-    border: 1px solid colors.$BLACK4;
+  .detail {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    height: 70px;
+    padding: 13px 15px;
+    margin-bottom: 10px;
+    background-color: white;
+    border: 1px solid colors.$GRAY2;
+    border-radius: 10px;
 
     dt {
-      color: colors.$GRAY4;
+      position: absolute;
+      font-size: 13px;
+      color: colors.$GRAY5;
+    }
+
+    dd {
+      margin-top: 25px;
+      font-size: 15px;
     }
 
     :nth-child(2) {
       font-weight: 500;
-      color: colors.$GRAY3;
+      color: colors.$BLACK1;
     }
 
     :nth-child(3) {
-      color: colors.$GREEN2;
+      color: colors.$GREEN1;
     }
 
     .red {
-      color: colors.$RED3;
+      color: colors.$RED1;
+    }
+
+    :root[color-theme='dark'] & {
+      background-color: colors.$BLACK3;
+      border: 1px solid colors.$BLACK4;
+
+      dt {
+        color: colors.$GRAY4;
+      }
+
+      :nth-child(2) {
+        font-weight: 500;
+        color: colors.$GRAY3;
+      }
+
+      :nth-child(3) {
+        color: colors.$GREEN2;
+      }
+
+      .red {
+        color: colors.$RED3;
+      }
     }
   }
 }

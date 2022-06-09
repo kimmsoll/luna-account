@@ -1,0 +1,33 @@
+@use 'src/styles/constants/colors';
+
+.big {
+  flex: 2 1 0;
+  padding: 10px;
+  margin: 5px;
+  font-size: 14px;
+  color: colors.$GRAY1;
+  background-color: colors.$BLUE2;
+  border-radius: 10px;
+
+  :root[color-theme='dark'] & {
+    color: colors.$GRAY2;
+    background-color: colors.$BLUE4;
+  }
+}
+
+.small {
+  flex: 1 1 0;
+  padding: 10px;
+  margin: 5px;
+  font-size: 14px;
+  color: colors.$GRAY5;
+  background-color: white;
+  border: 0.5px solid colors.$GRAY3;
+  border-radius: 10px;
+
+  :root[color-theme='dark'] & {
+    color: colors.$GRAY3;
+    background-color: colors.$BLACK4;
+    border: 0.5px solid colors.$GRAY5;
+  }
+}

@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react'
+import Portal from 'portal'
 import store from 'store'
 import { useRecoil } from 'hooks/state'
 import { dataListState } from 'states/data'
 import { colorThemeState } from 'states/theme'
+
 import { ArrowLeftIcon, ArrowRightIcon, DarkModeIcon, FilledAddIcon, LightModeIcon } from 'assets/svgs'
 import Chart from './Chart/Chart'
 import DetailList from './DetailList/DetailList'
-import Modal from './Modal/Modal'
-import Portal from 'portal'
-import Button from 'components/Button'
+import AddModal from './Modal/AddModal/AddModal'
+import Button from 'components/Button/Button'
+
 import styles from './home.module.scss'
 
 export interface IContentDetail {
@@ -25,10 +27,10 @@ const Home = () => {
   const [data] = useRecoil(dataListState)
   const [theme, setTheme] = useRecoil(colorThemeState)
   const [month, setMonth] = useState(new Date().getMonth() + 1)
-  const [openModal, setOpenModal] = useState(false)
+  const [openAddModal, setOpenAddModal] = useState(false)
 
-  const handleOpenModal = () => {
-    setOpenModal((prev) => !prev)
+  const handleOpenAddModal = () => {
+    setOpenAddModal((prev) => !prev)
   }
 
   const handleToPrevMonth = () => {
@@ -60,7 +62,7 @@ const Home = () => {
         <header className={styles.header}>
           <Button onClick={handleToggleColorTheme}>{theme === 'light' ? <DarkModeIcon /> : <LightModeIcon />}</Button>
           <h1>이 달의 소비</h1>
-          <Button onClick={handleOpenModal}>
+          <Button onClick={handleOpenAddModal}>
             <FilledAddIcon fill={theme === 'light' ? '#0c6d98' : '#897bac'} />
           </Button>
         </header>
@@ -75,10 +77,10 @@ const Home = () => {
             </Button>
           </div>
           <Chart month={month} />
-          <DetailList handleModal={handleOpenModal} month={month} />
-          {openModal && (
+          <DetailList handleAddModal={handleOpenAddModal} month={month} />
+          {openAddModal && (
             <Portal>
-              <Modal handleModal={handleOpenModal} />
+              <AddModal handleModal={handleOpenAddModal} />
             </Portal>
           )}
         </main>

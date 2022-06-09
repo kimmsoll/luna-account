@@ -1,16 +1,18 @@
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { useRecoil } from 'hooks/state'
-import { AddIcon } from 'assets/svgs'
-import Button from 'components/Button'
-import Loading from './Loading/Loading'
-import Detail from './Detail/Detail'
-import { IContentDetail } from 'home'
 import { dataListState } from 'states/data'
-import styles from './detailList.module.scss'
 import { colorThemeState } from 'states/theme'
+import { IContentDetail } from 'home'
+
+import Button from 'components/Button/Button'
+import Loading from './Loading/Loading'
+import { AddIcon } from 'assets/svgs'
+import Detail from './Detail/Detail'
+
+import styles from './detailList.module.scss'
 
 interface Props {
-  handleModal: () => void
+  handleAddModal: () => void
   month: number
 }
 
@@ -39,18 +41,18 @@ const filterSelected = (title: string, value: IContentDetail[]): IContentDetail[
   return sortData(selections[title])
 }
 
-const DetailList = ({ handleModal, month }: Props) => {
+const DetailList = ({ handleAddModal, month }: Props) => {
   const [data] = useRecoil(dataListState)
   const [theme] = useRecoil(colorThemeState)
   const [currData, setCurrData] = useState(data.filter((v) => month === Number(v.date.slice(5, 7))))
   const [isLoaded, setIsLoaded] = useState(false)
-  const [selected, setSelected] = useState<IContentDetail[] | []>([])
+  const [selectedOption, setSelectedOption] = useState<IContentDetail[] | []>([])
   const scrollRef = useRef<HTMLDivElement>(null)
 
-  const handleSelect = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleSelectOption = (e: ChangeEvent<HTMLInputElement>) => {
     scrollRef.current?.scrollIntoView()
     const currTitle = filterSelected(e.currentTarget.id, currData)
-    setSelected(currTitle)
+    setSelectedOption(currTitle)
   }
 
   useEffect(() => {
@@ -74,7 +76,13 @@ const DetailList = ({ handleModal, month }: Props) => {
           const key = `option__${idx}`
           return (
             <div key={key} className={styles.option}>
-              <input id={option.title} type='radio' name='tab' onChange={handleSelect} className={styles.optionInput} />
+              <input
+                id={option.title}
+                type='radio'
+                name='tab'
+                onChange={handleSelectOption}
+                className={styles.optionInput}
+              />
               <label htmlFor={option.title}>{option.value}</label>
             </div>
           )
@@ -85,12 +93,12 @@ const DetailList = ({ handleModal, month }: Props) => {
         {isLoaded && (
           <>
             <div ref={scrollRef} />
-            {selected?.map((v: IContentDetail, idx: number) => {
+            {selectedOption?.map((v: IContentDetail, idx: number) => {
               const key = `detail__${idx}`
               return <Detail key={key} detail={v} />
             })}
             <div className={styles.addDetail}>
-              <Button onClick={handleModal}>
+              <Button onClick={handleAddModal}>
                 <AddIcon fill={theme === 'light' ? '#0c6d98' : '#8d76d8'} />
               </Button>
               <p>거래 내역 추가하기</p>

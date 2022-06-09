@@ -1,11 +1,14 @@
+import { ChangeEvent, useState } from 'react'
+import Portal from 'portal'
 import dayjs from 'dayjs'
 import store from 'store'
-import { ChangeEvent, useState } from 'react'
 import { useRecoil } from 'hooks/state'
 import { dataListState } from 'states/data'
-import Portal from 'portal'
+
+import Button from 'components/Button/Button'
 import Calendar from './Calendar/Calendar'
-import styles from './modal.module.scss'
+
+import styles from './addModal.module.scss'
 
 interface Props {
   handleModal: () => void
@@ -21,13 +24,13 @@ const handleValidate = (type: string, content: string, amount: number) => {
   return true
 }
 
-const Modal = ({ handleModal }: Props) => {
+const AddModal = ({ handleModal }: Props) => {
+  const [data, setData] = useRecoil(dataListState)
   const [date, setDate] = useState(dayjs(new Date()).format('YYYY-MM-DD'))
   const [type, setType] = useState('')
   const [content, setContent] = useState('')
   const [amount, setAmount] = useState(0)
   const [isValidate, setIsValidate] = useState(true)
-  const [data, setData] = useRecoil(dataListState)
 
   const handleSelectType = (e: ChangeEvent<HTMLInputElement>) => {
     setType(e.currentTarget.value)
@@ -91,12 +94,12 @@ const Modal = ({ handleModal }: Props) => {
             value={amount}
           />
           <div className={styles.submitBtns}>
-            <button type='button' className={styles.addBtn} onClick={handleAddData}>
+            <Button onClick={handleAddData} size='big'>
               거래내역 추가
-            </button>
-            <button type='button' className={styles.backBtn} onClick={handleModal}>
+            </Button>
+            <Button onClick={handleModal} size='small'>
               취소
-            </button>
+            </Button>
           </div>
           {!isValidate && <p className={styles.validate}>양식에 맞게 모든 항목을 입력해주세요.</p>}
         </div>
@@ -105,4 +108,4 @@ const Modal = ({ handleModal }: Props) => {
   )
 }
 
-export default Modal
+export default AddModal

@@ -27,6 +27,7 @@
       padding: 5px 0;
       margin-bottom: 10px;
       font-weight: 500;
+      color: colors.$BLACK1;
       border-bottom: 1px solid colors.$GRAY2;
     }
 
@@ -66,38 +67,18 @@
       width: 100%;
       padding: 10px;
       margin-bottom: 30px;
-      color: colors.$BLACK1;
+      color: colors.$GRAY5;
       background-color: colors.$GRAY2;
       border-radius: 10px;
 
       &::placeholder {
         font-size: 14px;
-        color: colors.$BLACK1;
+        color: colors.$GRAY5;
       }
     }
 
     .submitBtns {
       display: flex;
-
-      button {
-        padding: 10px;
-        margin: 5px;
-        font-size: 14px;
-        border-radius: 10px;
-      }
-
-      .addBtn {
-        flex: 2 1 0;
-        color: colors.$GRAY1;
-        background-color: colors.$BLUE2;
-      }
-
-      .backBtn {
-        flex: 1 1 0;
-        color: colors.$GRAY5;
-        background-color: white;
-        border: 0.5px solid colors.$GRAY3;
-      }
     }
 
     .validate {
@@ -139,17 +120,6 @@
         &::placeholder {
           color: colors.$GRAY4;
         }
-      }
-
-      .addBtn {
-        color: colors.$GRAY2;
-        background-color: colors.$BLUE4;
-      }
-
-      .backBtn {
-        color: colors.$GRAY3;
-        background-color: colors.$BLACK4;
-        border: 0.5px solid colors.$GRAY5;
       }
 
       .validate {

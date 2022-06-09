@@ -1,9 +1,9 @@
-import { IContentDetail } from 'home'
-import { useRecoil } from 'hooks/state'
 import { useEffect, useState } from 'react'
+import { VictoryPie } from 'victory'
+import { useRecoil } from 'hooks/state'
 import { dataListState } from 'states/data'
 import { colorThemeState } from 'states/theme'
-import { VictoryPie } from 'victory'
+import { IContentDetail } from 'home'
 import styles from './chart.module.scss'
 
 interface Props {
@@ -26,6 +26,7 @@ const Chart = ({ month }: Props) => {
   const [data] = useRecoil(dataListState)
   const [theme] = useRecoil(colorThemeState)
   const [currData, setCurrData] = useState(data.filter((v) => month === Number(v.date.slice(5, 7))))
+
   const expenditure = getSum(currData, 'minus')
   const income = getSum(currData, 'plus')
 
