@@ -6,7 +6,7 @@ import { useRecoil } from 'hooks/state'
 import { dataListState } from 'states/data'
 
 import Button from 'components/Button/Button'
-import Calendar from './Calendar/Calendar'
+import Calendar from './Calendar'
 
 import styles from './addModal.module.scss'
 
@@ -90,14 +90,7 @@ const AddModal = ({ handleModal }: Props) => {
             value={content}
           />
           <p>금액</p>
-          <input
-            type='text'
-            className={styles.textInput}
-            placeholder='금액을 입력하세요(예. 13000)'
-            maxLength={15}
-            onChange={handleAmount}
-            value={amount}
-          />
+          <input type='text' className={styles.textInput} maxLength={15} onChange={handleAmount} value={amount} />
           <div className={styles.submitBtns}>
             <Button onClick={handleAddData} size='big'>
               거래내역 추가

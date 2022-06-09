@@ -1,9 +1,11 @@
-import { cx } from 'styles'
-import { IContentDetail } from 'home'
-import styles from './detail.module.scss'
-import DeleteModal from 'home/Modal/DeleteModal/DeleteModal'
-import Portal from 'portal'
 import { useState } from 'react'
+import Portal from 'portal'
+import { cx } from 'styles'
+import { IContentDetail } from 'types/type'
+
+import DeleteModal from 'home/DetailList/Detail/DeleteModal/DeleteModal'
+
+import styles from './detail.module.scss'
 
 interface Props {
   detail: IContentDetail

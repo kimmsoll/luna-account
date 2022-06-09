@@ -2,29 +2,24 @@ import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { useRecoil } from 'hooks/state'
 import { dataListState } from 'states/data'
 import { colorThemeState } from 'states/theme'
-import { IContentDetail } from 'home'
+import { monthState } from 'states/month'
+import { IContentDetail } from 'types/type'
 
+import OptionList from './OptionList/OptionList'
 import Button from 'components/Button/Button'
 import Loading from './Loading/Loading'
-import { AddIcon } from 'assets/svgs'
 import Detail from './Detail/Detail'
+import { AddIcon } from 'assets/svgs'
 
 import styles from './detailList.module.scss'
 
 interface Props {
   handleAddModal: () => void
-  month: number
 }
 
 interface Filtered {
   [key: string]: IContentDetail[]
 }
-
-const options = [
-  { title: 'all', value: '전체 내역' },
-  { title: 'income', value: '수입' },
-  { title: 'expenditure', value: '지출' },
-]
 
 const sortData = (data: IContentDetail[]) => {
   return data.sort((a: IContentDetail, b: IContentDetail) => {
@@ -41,12 +36,14 @@ const filterSelected = (title: string, value: IContentDetail[]): IContentDetail[
   return sortData(selections[title])
 }
 
-const DetailList = ({ handleAddModal, month }: Props) => {
+const DetailList = ({ handleAddModal }: Props) => {
+  const [month] = useRecoil(monthState)
   const [data] = useRecoil(dataListState)
   const [theme] = useRecoil(colorThemeState)
+
   const [currData, setCurrData] = useState(data.filter((v) => month === Number(v.date.slice(5, 7))))
-  const [isLoaded, setIsLoaded] = useState(false)
   const [selectedOption, setSelectedOption] = useState<IContentDetail[] | []>([])
+  const [isLoaded, setIsLoaded] = useState(false)
   const scrollRef = useRef<HTMLDivElement>(null)
 
   const handleSelectOption = (e: ChangeEvent<HTMLInputElement>) => {
@@ -71,23 +68,7 @@ const DetailList = ({ handleAddModal, month }: Props) => {
 
   return (
     <div className={styles.detailList}>
-      <div className={styles.optionList}>
-        {options.map((option, idx) => {
-          const key = `option__${idx}`
-          return (
-            <div key={key} className={styles.option}>
-              <input
-                id={option.title}
-                type='radio'
-                name='tab'
-                onChange={handleSelectOption}
-                className={styles.optionInput}
-              />
-              <label htmlFor={option.title}>{option.value}</label>
-            </div>
-          )
-        })}
-      </div>
+      <OptionList handleSelect={handleSelectOption} />
       <div className={styles.details}>
         {!isLoaded && <Loading />}
         {isLoaded && (

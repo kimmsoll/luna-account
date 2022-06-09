@@ -3,16 +3,17 @@ import { VictoryPie } from 'victory'
 import { useRecoil } from 'hooks/state'
 import { dataListState } from 'states/data'
 import { colorThemeState } from 'states/theme'
-import { IContentDetail } from 'home'
-import styles from './chart.module.scss'
+import { monthState } from 'states/month'
+import { IContentDetail } from 'types/type'
 
-interface Props {
-  month: number
-}
+import { WalletIcon } from 'assets/svgs'
+
+import styles from './chart.module.scss'
 
 const getSum = (data: IContentDetail[] | [], type: string) => {
   if (!data.length) return 0
   const targetData = data.filter((v) => v.details.type === type).map((v) => v.amount)
+
   if (targetData.length > 1) {
     return targetData.reduce((prev, curr) => prev + curr)
   }
@@ -22,13 +23,15 @@ const getSum = (data: IContentDetail[] | [], type: string) => {
   return 0
 }
 
-const Chart = ({ month }: Props) => {
+const Chart = () => {
   const [data] = useRecoil(dataListState)
+  const [month] = useRecoil(monthState)
   const [theme] = useRecoil(colorThemeState)
   const [currData, setCurrData] = useState(data.filter((v) => month === Number(v.date.slice(5, 7))))
 
   const expenditure = getSum(currData, 'minus')
   const income = getSum(currData, 'plus')
+  const isEmpty = !expenditure && !income
 
   useEffect(() => {
     setCurrData(data.filter((v) => month === Number(v.date.slice(5, 7))))
@@ -36,7 +39,13 @@ const Chart = ({ month }: Props) => {
 
   return (
     <div className={styles.chart}>
-      <div className={styles.chartImg}>
+      {isEmpty && (
+        <div className={styles.noChart}>
+          <p>{month}월 거래 내역이 없습니다</p>
+          <WalletIcon fill={theme === 'light' ? '#9cadbc' : '#a9aabc'} />
+        </div>
+      )}
+      {!isEmpty && (
         <VictoryPie
           data={
             (income === 0 && [{ x: '지출', y: expenditure }]) ||
@@ -53,7 +62,7 @@ const Chart = ({ month }: Props) => {
           style={{ labels: { fontSize: 12, fill: theme === 'light' ? 'white' : '#d1d1e6' } }}
           colorScale={theme === 'light' ? ['#98C7CA', '#0c6d98'] : ['#494454', '#8d76d8']}
         />
-      </div>
+      )}
       <div className={styles.chartDetail}>
         <dl className={styles.expenditure}>
           <dt>나간 돈</dt>

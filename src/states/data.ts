@@ -1,7 +1,7 @@
 import store from 'store'
-import { getData } from 'services/service'
-import { IContentDetail } from 'home/index'
 import { atom } from 'recoil'
+import { getData } from 'services/service'
+import { IContentDetail } from 'types/type'
 
 const storedData = store.get('data')
 const data = storedData || getData().then((res) => res)

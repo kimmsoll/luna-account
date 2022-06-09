@@ -4,28 +4,6 @@
   height: 45vh;
   max-height: 320px;
 
-  .optionList {
-    display: flex;
-    width: 100%;
-    padding: 10px 0;
-    border-bottom: 0.8px solid colors.$GRAY3;
-
-    .option {
-      padding-left: 25px;
-      font-size: 16px;
-      color: colors.$GRAY4;
-
-      label {
-        cursor: pointer;
-      }
-
-      .optionInput:checked + label {
-        font-weight: 500;
-        color: colors.$GRAY5;
-      }
-    }
-  }
-
   .details {
     height: 85%;
     padding: 10px;
@@ -47,27 +25,12 @@
       > p {
         padding-top: 5px;
       }
-    }
-  }
 
-  :root[color-theme='dark'] & {
-    .optionList {
-      border-bottom: 0.8px solid colors.$BLACK4;
-
-      .option {
-        color: colors.$GRAY4;
-
-        .optionInput:checked + label {
-          font-weight: 500;
-          color: colors.$GRAY3;
-        }
+      :root[color-theme='dark'] & {
+        color: colors.$GRAY3;
+        background-color: colors.$BLACK4;
+        border: 0.5px solid colors.$GRAY5;
       }
-    }
-
-    .addDetail {
-      color: colors.$GRAY3;
-      background-color: colors.$BLACK4;
-      border: 0.5px solid colors.$GRAY5;
     }
   }
 }

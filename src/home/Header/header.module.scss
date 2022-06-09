@@ -1,0 +1,17 @@
+@use 'src/styles/constants/colors';
+
+.header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 18px 12px;
+  font-size: 18px;
+  color: colors.$BLACK1;
+  border-bottom: 0.8px solid colors.$GRAY3;
+
+  :root[color-theme='dark'] & {
+    color: colors.$GRAY3;
+    border-bottom: 0.8px solid colors.$BLACK4;
+  }
+}

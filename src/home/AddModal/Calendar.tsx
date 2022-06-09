@@ -1,6 +1,7 @@
-import dayjs from 'dayjs'
 import { useState } from 'react'
 import ReactDatePicker from 'react-datepicker'
+import dayjs from 'dayjs'
+
 import 'react-datepicker/dist/react-datepicker.css'
 
 interface Props {
@@ -19,7 +20,8 @@ const Calendar = ({ setDate }: Props) => {
     <ReactDatePicker
       selected={currDate}
       onChange={handleDate}
-      maxDate={new Date(dayjs(currDate).endOf('M').format('YYYY-MM-DD'))}
+      minDate={new Date(dayjs(currDate).startOf('y').format('YYYY-MM-DD'))}
+      maxDate={new Date(dayjs(currDate).endOf('y').format('YYYY-MM-DD'))}
       dateFormat='yyyy년 MM월 dd일'
     />
   )

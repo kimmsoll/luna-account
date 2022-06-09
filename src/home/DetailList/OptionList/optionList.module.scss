@@ -1,0 +1,36 @@
+@use 'src/styles/constants/colors';
+
+.optionList {
+  display: flex;
+  width: 100%;
+  padding: 10px 0;
+  border-bottom: 0.8px solid colors.$GRAY3;
+
+  .option {
+    padding-left: 25px;
+    font-size: 16px;
+    color: colors.$GRAY4;
+
+    label {
+      cursor: pointer;
+    }
+
+    .optionInput:checked + label {
+      font-weight: 500;
+      color: colors.$GRAY5;
+    }
+  }
+
+  :root[color-theme='dark'] & {
+    border-bottom: 0.8px solid colors.$BLACK4;
+
+    .option {
+      color: colors.$GRAY4;
+
+      .optionInput:checked + label {
+        font-weight: 500;
+        color: colors.$GRAY3;
+      }
+    }
+  }
+}

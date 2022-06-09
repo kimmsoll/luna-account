@@ -1,0 +1,19 @@
+@use 'src/styles/constants/colors';
+
+.selectMonth {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  > p {
+    padding: 0 50px 2px;
+    font-size: 18px;
+    color: colors.$BLACK1;
+  }
+
+  :root[color-theme='dark'] & {
+    > p {
+      color: colors.$GRAY3;
+    }
+  }
+}
