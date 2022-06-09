@@ -1,8 +1,8 @@
 @use 'src/styles/constants/colors';
 
 .detailList {
-  height: 41vh;
-  max-height: 330px;
+  height: 45vh;
+  max-height: 320px;
 
   .optionList {
     display: flex;
@@ -27,7 +27,7 @@
   }
 
   .details {
-    height: 90%;
+    height: 85%;
     padding: 10px;
     overflow-y: scroll;
 

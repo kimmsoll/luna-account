@@ -46,7 +46,7 @@ const Home = () => {
   }
 
   const handleToggleColorTheme = () => {
-    setTheme((prev: string) => (prev === 'light' ? 'dark' : 'light'))
+    setTheme((prev: 'light' | 'dark') => (prev === 'light' ? 'dark' : 'light'))
     store.set('theme', theme === 'light' ? 'dark' : 'light')
   }
 

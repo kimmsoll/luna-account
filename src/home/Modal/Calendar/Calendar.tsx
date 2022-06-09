@@ -15,6 +15,13 @@ const Calendar = ({ setDate }: Props) => {
     setDate(dayjs(date).format('YYYY-MM-DD'))
   }
 
-  return <ReactDatePicker selected={currDate} onChange={handleDate} dateFormat='yyyy년 MM월 dd일' />
+  return (
+    <ReactDatePicker
+      selected={currDate}
+      onChange={handleDate}
+      maxDate={new Date(dayjs(currDate).endOf('M').format('YYYY-MM-DD'))}
+      dateFormat='yyyy년 MM월 dd일'
+    />
+  )
 }
 export default Calendar

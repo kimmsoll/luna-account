@@ -44,9 +44,12 @@ const Chart = ({ month }: Props) => {
               { x: '지출', y: expenditure },
             ]
           }
-          innerRadius={50}
-          labelRadius={73}
-          style={{ labels: { fontSize: 32, fill: theme === 'light' ? 'white' : '#d1d1e6' } }}
+          padding={{ top: 0, bottom: 0 }}
+          height={120}
+          width={300}
+          innerRadius={20}
+          labelRadius={30}
+          style={{ labels: { fontSize: 12, fill: theme === 'light' ? 'white' : '#d1d1e6' } }}
           colorScale={theme === 'light' ? ['#98C7CA', '#0c6d98'] : ['#494454', '#8d76d8']}
         />
       </div>

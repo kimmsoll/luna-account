@@ -3,15 +3,11 @@
 .chart {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  height: 32vh;
-  max-height: 280px;
+  justify-content: space-evenly;
+  height: 30vh;
+  min-height: 200px;
+  max-height: 250px;
   margin-bottom: 10px;
-
-  .chartImg {
-    height: 75%;
-    max-height: 220px;
-  }
 
   .chartDetail {
     display: flex;
