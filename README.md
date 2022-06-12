@@ -54,12 +54,12 @@ yarn && yarn start
 ### 라이트 모드
 | 홈 | 거래 내역 추가 | 거래 내역 삭제 |
 |:---:|:---:|:---:|
-|<img src="https://user-images.githubusercontent.com/62868465/172981620-90e15b37-46ab-49da-a879-0e392600a20b.gif" width="220" />|<img src="https://user-images.githubusercontent.com/62868465/172982051-158b8d6b-aba6-4b51-9462-960f67882af4.gif" width="220" />|<img src="https://user-images.githubusercontent.com/62868465/172982674-a5438c66-6eee-49c7-93c3-9f9d7e30d588.gif" width="220" />|
+|<img src="https://user-images.githubusercontent.com/62868465/173240374-f48666d5-a925-4655-b8fd-48b6e4259713.gif" width="220" />|<img src="https://user-images.githubusercontent.com/62868465/173240425-0b22ea5e-6b19-4f21-85d9-439fe3d3cb7d.gif" width="220" />|<img src="https://user-images.githubusercontent.com/62868465/173240429-4f61cd14-ccbb-452d-8d70-40e0aa933f04.gif" width="220" />|
 
 ### 다크 모드
 | 홈 | 거래 내역 추가 | 거래 내역 삭제 |
 |:---:|:---:|:---:|
-|<img src="https://user-images.githubusercontent.com/62868465/172983437-f91d9eec-393b-44c6-82e5-676172049dfd.gif" width="220" />|<img src="https://user-images.githubusercontent.com/62868465/172983731-8aacc6ea-c62d-4728-8b1d-fdcf2af2d2c6.gif" width="220" />|<img src="https://user-images.githubusercontent.com/62868465/172984099-6fbaeb27-c3c0-488b-9a4b-000b8d91e193.gif" width="220" />|
+|<img src="https://user-images.githubusercontent.com/62868465/173240497-79cbb110-3db4-4d67-9e6f-4da5ad9b45a5.gif" width="220" />|<img src="https://user-images.githubusercontent.com/62868465/173240494-39fd94db-862a-4658-956d-e3ea6e001d2a.gif" width="220" />|<img src="https://user-images.githubusercontent.com/62868465/173240489-5a8ed3fc-c943-4dc7-addf-ac1c21e2f1cc.gif" width="220" />|
 
 ## ✏️ 배운 점
 - react portal 을 처음 써봤는데, 원하는 대로 구현할 수 있어 즐거운 경험이었습니다.
