@@ -42,15 +42,15 @@ const DetailList = ({ handleAddModal }: Props) => {
   const [theme] = useRecoil(colorThemeState)
 
   const [currMonthData, setCurrMonthData] = useState(data.filter((v) => month === Number(v.date.slice(5, 7))))
-  const [selectedOptionData, setSelectedOptionData] = useState<IContentDetail[]>([])
+  const [selectedData, setSelectedData] = useState<IContentDetail[]>([])
   const [isLoaded, setIsLoaded] = useState(false)
-  const [isChecked, setIsChecked] = useState('')
+  const [isChecked, setIsChecked] = useState('all')
   const scrollRef = useRef<HTMLDivElement>(null)
 
   const handleSelectOption = (e: ChangeEvent<HTMLInputElement>) => {
     scrollRef.current?.scrollIntoView()
-    const currData = filterSelected(e.currentTarget.id, currMonthData)
-    setSelectedOptionData(currData)
+    const sortedData = filterSelected(e.currentTarget.id, currMonthData)
+    setSelectedData(sortedData)
     isChecked !== e.currentTarget.id && setIsChecked(e.currentTarget.id)
   }
 
@@ -64,8 +64,12 @@ const DetailList = ({ handleAddModal }: Props) => {
 
   useEffect(() => {
     setCurrMonthData(data.filter((v) => month === Number(v.date.slice(5, 7))))
-    setSelectedOptionData([])
-    setIsChecked('')
+    const sortedData = filterSelected(
+      'all',
+      data.filter((v) => month === Number(v.date.slice(5, 7)))
+    )
+    setSelectedData(sortedData)
+    setIsChecked('all')
   }, [month, data])
 
   return (
@@ -76,7 +80,7 @@ const DetailList = ({ handleAddModal }: Props) => {
         {isLoaded && (
           <>
             <div ref={scrollRef} />
-            {selectedOptionData?.map((v: IContentDetail, idx: number) => {
+            {selectedData.map((v: IContentDetail, idx: number) => {
               const key = `detail__${idx}`
               return <Detail key={key} detail={v} />
             })}
