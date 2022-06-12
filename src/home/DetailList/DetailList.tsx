@@ -41,40 +41,42 @@ const DetailList = ({ handleAddModal }: Props) => {
   const [data] = useRecoil(dataListState)
   const [theme] = useRecoil(colorThemeState)
 
-  const [currData, setCurrData] = useState(data.filter((v) => month === Number(v.date.slice(5, 7))))
-  const [selectedOption, setSelectedOption] = useState<IContentDetail[] | []>([])
+  const [currMonthData, setCurrMonthData] = useState(data.filter((v) => month === Number(v.date.slice(5, 7))))
+  const [selectedOptionData, setSelectedOptionData] = useState<IContentDetail[]>([])
   const [isLoaded, setIsLoaded] = useState(false)
+  const [isChecked, setIsChecked] = useState('')
   const scrollRef = useRef<HTMLDivElement>(null)
 
   const handleSelectOption = (e: ChangeEvent<HTMLInputElement>) => {
     scrollRef.current?.scrollIntoView()
-    const currTitle = filterSelected(e.currentTarget.id, currData)
-    setSelectedOption(currTitle)
+    const currData = filterSelected(e.currentTarget.id, currMonthData)
+    setSelectedOptionData(currData)
+    isChecked !== e.currentTarget.id && setIsChecked(e.currentTarget.id)
   }
 
   useEffect(() => {
-    let timeout: any
-    if (!isLoaded) {
-      timeout = setTimeout(() => {
-        setIsLoaded(true)
-      }, 1000)
-    }
+    setIsLoaded(false)
+    const timeout: NodeJS.Timeout = setTimeout(() => {
+      setIsLoaded(true)
+    }, 500)
     return () => clearTimeout(timeout)
-  })
+  }, [month])
 
   useEffect(() => {
-    setCurrData(data.filter((v) => month === Number(v.date.slice(5, 7))))
-  }, [data, month])
+    setCurrMonthData(data.filter((v) => month === Number(v.date.slice(5, 7))))
+    setSelectedOptionData([])
+    setIsChecked('')
+  }, [month, data])
 
   return (
     <div className={styles.detailList}>
-      <OptionList handleSelect={handleSelectOption} />
+      <OptionList handleSelect={handleSelectOption} isChecked={isChecked} />
       <div className={styles.details}>
         {!isLoaded && <Loading />}
         {isLoaded && (
           <>
             <div ref={scrollRef} />
-            {selectedOption?.map((v: IContentDetail, idx: number) => {
+            {selectedOptionData?.map((v: IContentDetail, idx: number) => {
               const key = `detail__${idx}`
               return <Detail key={key} detail={v} />
             })}

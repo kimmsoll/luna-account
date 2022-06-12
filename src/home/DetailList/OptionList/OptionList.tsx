@@ -3,6 +3,7 @@ import styles from './optionList.module.scss'
 
 interface Props {
   handleSelect: (e: ChangeEvent<HTMLInputElement>) => void
+  isChecked: string
 }
 
 const options = [
@@ -11,15 +12,23 @@ const options = [
   { title: 'expenditure', value: '지출' },
 ]
 
-const OptionList = ({ handleSelect }: Props) => {
+const OptionList = ({ handleSelect, isChecked }: Props) => {
   return (
     <div className={styles.optionList}>
       {options.map((option, idx) => {
         const key = `option__${idx}`
+        const { title, value } = option
         return (
           <div key={key} className={styles.option}>
-            <input id={option.title} type='radio' name='tab' onChange={handleSelect} className={styles.optionInput} />
-            <label htmlFor={option.title}>{option.value}</label>
+            <input
+              id={title}
+              type='radio'
+              name='tab'
+              checked={isChecked === title}
+              onChange={handleSelect}
+              className={styles.optionInput}
+            />
+            <label htmlFor={title}>{value}</label>
           </div>
         )
       })}
