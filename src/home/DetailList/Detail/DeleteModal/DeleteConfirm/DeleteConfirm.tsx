@@ -1,4 +1,3 @@
-import store from 'store'
 import Portal from 'portal'
 import { useRecoil } from 'hooks/state'
 import { dataListState } from 'states/data'
@@ -18,10 +17,6 @@ const DeleteConfirm = ({ id, handleDeleteModal, handleConfirmModal }: Props) => 
 
   const handleDeleteData = () => {
     setData(data.filter((v) => v.id !== id))
-    store.set(
-      'data',
-      data.filter((v) => v.id !== id)
-    )
     handleDeleteModal()
     handleConfirmModal()
   }

@@ -1,20 +1,30 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Portal from 'portal'
+import store from 'store'
+import { useRecoil } from 'hooks/state'
+import { dataListState } from 'states/data'
 
-import Header from './Header/Header'
 import Chart from './Chart/Chart'
-import DetailList from './DetailList/DetailList'
+import Header from './Header/Header'
 import AddModal from './AddModal/AddModal'
+import DetailList from './DetailList/DetailList'
 import MonthSelector from './MonthSelector/MonthSelector'
 
 import styles from './home.module.scss'
 
 const Home = () => {
+  const [data] = useRecoil(dataListState)
   const [openAddModal, setOpenAddModal] = useState(false)
 
   const handleOpenAddModal = () => {
     setOpenAddModal((prev) => !prev)
   }
+
+  useEffect(() => {
+    if (data.length) {
+      store.set('data', data)
+    }
+  }, [data])
 
   return (
     <div className={styles.homeWrapper}>

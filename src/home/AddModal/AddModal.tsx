@@ -1,7 +1,6 @@
 import { ChangeEvent, useState } from 'react'
 import Portal from 'portal'
 import dayjs from 'dayjs'
-import store from 'store'
 import { useRecoil } from 'hooks/state'
 import { dataListState } from 'states/data'
 
@@ -61,7 +60,6 @@ const AddModal = ({ handleModal }: Props) => {
       }
       setIsValidate(true)
       setData([...data, newData])
-      store.set('data', [...data, newData])
       handleModal()
     } else setIsValidate(false)
   }
